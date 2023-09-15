@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3gkf58u8hwlc"]
+
+[ext_resource type="Script" path="res://Script/Player.cs" id="1_bupfl"]
+[ext_resource type="Script" path="res://Script/PlayerInput.cs" id="1_siip0"]
+[ext_resource type="Script" path="res://Script/CharacterMotor.cs" id="3_1q82f"]
+[ext_resource type="Texture2D" uid="uid://hh5sncfc3iw1" path="res://icon.svg" id="4_rysgt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuah7"]
+size = Vector2(128, 126)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" type="Node2D" parent="." node_paths=PackedStringArray("_input", "_motor")]
+script = ExtResource("1_bupfl")
+_input = NodePath("Input")
+_motor = NodePath("PlayerMotor")
+
+[node name="Input" type="Node" parent="Player"]
+script = ExtResource("1_siip0")
+
+[node name="PlayerMotor" type="CharacterBody2D" parent="Player"]
+script = ExtResource("3_1q82f")
+_speed = 600.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerMotor"]
+shape = SubResource("RectangleShape2D_tuah7")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/PlayerMotor"]
+texture = ExtResource("4_rysgt")
