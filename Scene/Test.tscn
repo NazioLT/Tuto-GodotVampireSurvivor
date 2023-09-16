@@ -1,12 +1,45 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3gkf58u8hwlc"]
+[gd_scene load_steps=10 format=3 uid="uid://b3gkf58u8hwlc"]
 
 [ext_resource type="Script" path="res://Script/Player.cs" id="1_bupfl"]
 [ext_resource type="Script" path="res://Script/PlayerInput.cs" id="1_siip0"]
 [ext_resource type="Script" path="res://Script/CharacterMotor.cs" id="3_1q82f"]
-[ext_resource type="Texture2D" uid="uid://hh5sncfc3iw1" path="res://icon.svg" id="4_rysgt"]
+[ext_resource type="SpriteFrames" uid="uid://bukk46ts4ctc1" path="res://Animations/PlayerAnim.tres" id="4_mo0x5"]
+[ext_resource type="Texture2D" uid="uid://dqdctnhbpucmp" path="res://Sprites/Enemy 1/frame-1.png" id="5_fdct1"]
+[ext_resource type="Script" path="res://Script/CharacterAnimator.cs" id="6_f3kry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuah7"]
-size = Vector2(128, 126)
+size = Vector2(98, 80)
+
+[sub_resource type="Animation" id="Animation_kwogy"]
+resource_name = "EnemyAnim"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite2D:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.630931, -0.25, 0, 0.25, 0, 0.6, -0.25, 0, 0.25, 0, 0.630931, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjpyg"]
+_data = {
+"EnemyAnim": SubResource("Animation_kwogy")
+}
 
 [node name="Node2D" type="Node2D"]
 
@@ -25,5 +58,22 @@ _speed = 600.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PlayerMotor"]
 shape = SubResource("RectangleShape2D_tuah7")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player/PlayerMotor"]
-texture = ExtResource("4_rysgt")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player/PlayerMotor"]
+scale = Vector2(0.214112, 0.214112)
+sprite_frames = ExtResource("4_mo0x5")
+autoplay = "default"
+
+[node name="Enemy" type="Node2D" parent="."]
+position = Vector2(300, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+position = Vector2(0, 0.865559)
+scale = Vector2(0.632075, 0.601995)
+texture = ExtResource("5_fdct1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_xjpyg")
+}
+script = ExtResource("6_f3kry")
