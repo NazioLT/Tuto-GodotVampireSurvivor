@@ -35,6 +35,5 @@ autoplay = "default"
 [node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("_objectToFollow")]
 script = ExtResource("5_6bf3j")
 _objectToFollow = NodePath("../PlayerMotor")
-_maxSpeed = 400.0
 
 [node name="Enemy" parent="." instance=ExtResource("12_4rvk5")]
