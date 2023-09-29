@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class CharacterMotor : CharacterBody2D
 {
@@ -10,6 +9,11 @@ public partial class CharacterMotor : CharacterBody2D
 	public void MovementPerformed(Vector2 input)
 	{
 		_movementInput = input.Normalized();
+	}
+
+	public void Stop()
+	{
+		_movementInput = Vector2.Zero;
 	}
 	
 	public override void _PhysicsProcess(double delta)
