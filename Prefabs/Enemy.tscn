@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvq58fgp2bb20"]
+[gd_scene load_steps=8 format=3 uid="uid://bvq58fgp2bb20"]
 
 [ext_resource type="Texture2D" uid="uid://dqdctnhbpucmp" path="res://Sprites/Enemy 1/frame-1.png" id="1_4e1xx"]
+[ext_resource type="Script" path="res://Script/BasicEnemy.cs" id="1_nd07y"]
 [ext_resource type="Script" path="res://Script/CharacterAnimator.cs" id="2_x2nla"]
+[ext_resource type="Script" path="res://Script/CharacterMotor.cs" id="2_x7hkb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2fx2t"]
+size = Vector2(100, 118)
 
 [sub_resource type="Animation" id="Animation_kwogy"]
 resource_name = "EnemyAnim"
@@ -9,7 +14,7 @@ loop_mode = 1
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = false
-tracks/0/path = NodePath("Sprite2D:scale:x")
+tracks/0/path = NodePath("CharacterBody2D/Sprite2D:scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -20,7 +25,7 @@ tracks/0/keys = {
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale:y")
+tracks/1/path = NodePath("CharacterBody2D/Sprite2D:scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,15 +39,25 @@ _data = {
 "EnemyAnim": SubResource("Animation_kwogy")
 }
 
-[node name="Enemy" type="Node2D"]
-position = Vector2(300, 0)
+[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_motor")]
+script = ExtResource("1_nd07y")
+_motor = NodePath("CharacterBody2D")
+_attackDistance = 200.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("2_x7hkb")
+_speed = 200.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_2fx2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 position = Vector2(0, 0.865559)
 scale = Vector2(0.632075, 0.601995)
 texture = ExtResource("1_4e1xx")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../..")
 reset_on_save = false
 libraries = {
 "": SubResource("AnimationLibrary_xjpyg")

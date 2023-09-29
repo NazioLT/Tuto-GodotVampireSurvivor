@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3gkf58u8hwlc"]
+[gd_scene load_steps=8 format=3 uid="uid://b3gkf58u8hwlc"]
 
 [ext_resource type="Script" path="res://Script/Player.cs" id="1_bupfl"]
 [ext_resource type="Script" path="res://Script/PlayerInput.cs" id="1_siip0"]
 [ext_resource type="Script" path="res://Script/CharacterMotor.cs" id="3_1q82f"]
 [ext_resource type="SpriteFrames" uid="uid://bukk46ts4ctc1" path="res://Animations/PlayerAnim.tres" id="4_mo0x5"]
+[ext_resource type="Script" path="res://Script/CameraFollower.cs" id="5_6bf3j"]
 [ext_resource type="PackedScene" uid="uid://bvq58fgp2bb20" path="res://Prefabs/Enemy.tscn" id="12_4rvk5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuah7"]
@@ -31,4 +32,11 @@ scale = Vector2(0.214112, 0.214112)
 sprite_frames = ExtResource("4_mo0x5")
 autoplay = "default"
 
-[node name="Enemy" parent="." instance=ExtResource("12_4rvk5")]
+[node name="Camera2D" type="Camera2D" parent="Player" node_paths=PackedStringArray("_objectToFollow")]
+position_smoothing_enabled = true
+script = ExtResource("5_6bf3j")
+_objectToFollow = NodePath("../PlayerMotor")
+
+[node name="Enemy" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("12_4rvk5")]
+position = Vector2(200, 0)
+_player = NodePath("../Player")
