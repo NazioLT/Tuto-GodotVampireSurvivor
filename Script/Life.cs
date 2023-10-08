@@ -25,6 +25,7 @@ public partial class Life : Node
     private void ModifyLife(float amount)
     {
         _currentLife += amount;
+        _currentLife = Mathf.Clamp(_currentLife, 0f, _maxLife);
 
         EmitSignal(SignalName.OnLifeChanged, _currentLife);
     }
