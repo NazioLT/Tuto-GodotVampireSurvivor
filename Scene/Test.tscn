@@ -6,7 +6,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bukk46ts4ctc1" path="res://Animations/PlayerAnim.tres" id="4_mo0x5"]
 [ext_resource type="Script" path="res://Script/CameraFollower.cs" id="5_6bf3j"]
 [ext_resource type="Script" path="res://Script/Life.cs" id="6_jyqxr"]
-[ext_resource type="PackedScene" uid="uid://c1aud8ckd0vex" path="res://Prefabs/UI.tscn" id="7_ehapp"]
+[ext_resource type="PackedScene" uid="uid://c1aud8ckd0vex" path="res://Prefabs/HUD.tscn" id="7_ehapp"]
 [ext_resource type="PackedScene" uid="uid://bvq58fgp2bb20" path="res://Prefabs/Enemy.tscn" id="12_4rvk5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tuah7"]
