@@ -3,12 +3,15 @@ using System;
 
 public partial class Hud : Control
 {
-	[Export] private Life _life = null;
 	[Export] private ProgressBar _bar = null;
+
+	private Life _life = null;
 
 	public override void _Ready()
 	{
-		_life.OnLifeChanged += OnLifeChanged;
+		_life = Player.Instance.Life;
+
+        _life.OnLifeChanged += OnLifeChanged;
     }
 
 	private void OnLifeChanged(float newLife)
