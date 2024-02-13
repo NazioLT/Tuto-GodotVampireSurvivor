@@ -20,7 +20,7 @@ public partial class CharacterAnimator : Node
 
     public override void _Process(double delta)
     {
-        bool goLeft = _motor.Velocity.X > 0;
+        bool goLeft = _motor.LastDirection.X > 0;
         if (_characterSprite != null)
             _characterSprite.FlipH = goLeft;
 
